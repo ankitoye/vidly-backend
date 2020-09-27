@@ -1,0 +1,23 @@
+{
+  "name": "vidly-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "DEBUG=app:* nodemon.cmd",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "debug": "^4.1.1",
+    "express": "^4.17.1",
+    "fawn": "^2.1.5",
+    "joi": "^17.2.0",
+    "joi-objectid": "^3.0.1",
+    "mongoose": "^5.9.27"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.2"
+  }
+}
