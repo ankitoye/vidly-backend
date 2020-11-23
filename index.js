@@ -1,3 +1,5 @@
+require("dotenv").config();
+const config = require("config");
 const Joi = require("joi");
 Joi.objectId = require("joi-objectid")(Joi);
 const express = require("express");
@@ -6,9 +8,16 @@ const customers = require("./routes/customers");
 const movies = require("./routes/movies");
 const users = require("./routes/users");
 const rentals = require("./routes/rentals");
+const auth = require("./routes/auth");
+const authMiddleware = require("./middleware/auth");
 const app = express();
 const mongoose = require("mongoose");
 const startupDebugger = require("debug")("app:startup");
+
+if (!config.get("jwtPrivateKey")) {
+  console.error("FATAL ERROR: jwtPrivateKey is not defined");
+  process.exit(1);
+}
 
 mongoose
   .connect("mongodb://localhost/vidly", {
@@ -27,6 +36,7 @@ app.use("/api/customers", customers);
 app.use("/api/movies", movies);
 app.use("/api/rentals", rentals);
 app.use("/api/users", users);
+app.use("/api/auth", auth);
 
 startupDebugger("Starting");
 
